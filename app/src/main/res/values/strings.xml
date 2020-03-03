@@ -1,0 +1,19 @@
+<resources>
+    <string name="text_no_data">BRAK DANYCH</string>
+    <string name="app_name">FajneStudia2020</string>
+    <string name="text_main_loaded_data">Załadowane dane: %s</string>
+    <string name="button_learn">Rozpocznij naukę</string>
+    <string name="button_load">Ładuj inne dane</string>
+    <string name="button_save">Utwórz nowe dane</string>
+    <string name="text_save_title">Dodawanie nowych danych</string>
+    <string name="text_save_descrption">Wklej tekst w odpowiednim formacie i zapisz jako nowy zbiór danych</string>
+    <string name="text_save_data_title">Tytuł danych</string>
+    <string name="text_save_data">Dane</string>
+    <string name="text_load_title">Wybierz Dane</string>
+    <string name="text_learn_title" >Pytanie %s/%s</string>
+    <string name="text_generated">%s</string>
+    <string name="text_learn_score">Aktualny wynik %s/%s</string>
+    <string name="text_true">PRAWDA</string>
+    <string name="text_false">FAŁSZ</string>
+    <string name="text_empty" />
+</resources>
