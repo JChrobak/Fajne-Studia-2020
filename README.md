@@ -38,6 +38,7 @@ Does 2+3=0
 Sum of two numbers that are bigger than 0 is always bigger than 0.
 
 ```
+You can find sample data [here](https://github.com/JChrobak/Fajne-Studia-2020/blob/master/samples/AK-data-example.txt).
 
 You can add data to the app by copying and pasting it to the edit box inside the app or by copying a .txt file to its */files/text/* directory (*Android/data/com.example.fajnestudia2020/files/text/*).
 
