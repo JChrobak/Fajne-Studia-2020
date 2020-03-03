@@ -1,0 +1,378 @@
+RS-232 jest portem przeznaczonym do synchronicznej transmisji znakowej. Generator taktu odpowiedzialny za wyprowadzanie znaków typowo ustawiany jest na: 1200bd, 2400bd, 4800bd, 9600bd, 19200bd.
+0
+RS-232 jest portem przeznaczonym do asynchronicznej transmisji znakowej. Da sie sztucznie stworzyc synchroniczna transmisje.
+Linie kontrolne w interfejsie RS-232 to: DTR, DSR, RTS, CTS, RI, DCD. Pary DTR/DSR i RTS/CTS wykorzystywane sa do realizacji handshake’u w połaczeniach bezmodemowych.
+1
+Tak, te pary linii moga byc wykorzystywane do handshake podczas gdy RxD i TxD zajmuja sie przesyłem danych.
+Transakcja w systemie MODBUS składa sie z zapytania (query) wysyłanego przez stacje Slave i odpowiedzi odsyłanej przez stacje Master.
+0
+Jest odwrotnie - zapytanie wysyła Master, a odpowiedz odsyła Slave.
+W trybie transmisji ASCII znacznikiem poczatku ramki jest znak ’:’, a konca ramki para znaków CR LF. W trybie transmisji RTU znacznikiem poczatku ramki jest znak ’Ctrl-A’, a konca para znaków CTRL-Y CTRL-Z.
+0
+Zdanie jest poprawne dla ASCII. Dla RTU, znacznikiem poczatku i konca ramki jest przerwa o długosci minimum 4T, gdzie T jest czasem trwania jednego znaku.
+Standard RS-232 transmituje znaki synchronicznie, bity w znakach [asynchronicznie].
+0
+Ostatnie słowo uciete, wiec spekuluje ze tak własnie było napisane. To nieprawda, jest odwrotnie.
+Standard RS-422 pozwala na osiagniecie szybkosci 10MBodów na odległosci 100m.
+1
+IMO pozwala, na slajdzie 12 jest napisane ze 10 Mbd przy zasiegu DO 100m - czyli 100m chyba tez.
+Liniami kontrolnymi w RS-232 nie sa linie TxD, RxD, SG.
+1
+Owszem, TxD i RxD sa liniami danych, a SG to po prostu masa.
+System MODBUS składa sie z faz zapytania i odpowiedzi.
+1
+Tak własnie jest.
+W systemie MODBUS Obowiazuje master/slave.
+1
+Pewnie, a w dodatku Slave’ów moze byc wielu.
+W systemie MODBUS Predkosci transmisji wynosza od 1200 do 19200bd.
+1
+Jak najbardziej.
+W systemie MODBUS Ramka w ASCII moze miec format 7N2 (lub np. 7E1, 7O1).
+1
+Tak, patrz warstwa fizyczna MODBUS.
+Ramka w RTU moze miec format 8N2 *(lub np. 8E1, 8O1).
+1
+Tak, patrz warstwa fizyczna MODBUS.
+W trybie transmisji RTU jest kontrola błedów CRC.
+1
+Tak, jest elementem budowy ramki RTU.
+Bit kontrolny w RS-232 zalezy od bitu danych i bitu stopu.
+0
+Bit kontrolny słuzy do kontroli parzystosci/nieparzystosci, nie ma zwiazku z bitem stopu.
+Za pomoca RS-232 mozemy połaczyc ze soba 2 stacje DCE
+0
+Połaczyc mozemy dwie stacje DTE, lub DTE z DCE. Dwie stacje DCE łacza sie za pomoca łacza telefonicznego.
+W MODBUS kontrola błedów jest realizowana za pomoca LRC lub CRC.
+1
+Tak, LRC wykorzystywane jest w trybie ASCII, CRC w trybie RTU.
+Do portu RS 485 mozna podłaczyc tylko jedno urzadzenie, ale za to obsługiwac go z duzo wieksza szybkoscia i na wieksza odległosc niz jest to mozliwe w przypadku interfejsu RS 232.
+0
+Mozna podłaczyc do 32 stacji.
+Format ramki w protokole Modbus jest nastepujacy: znacznik poczatku ramki, adres urzadzenia slave, adres mastera, pole danych, znacznik konca ramki.
+0
+Opis nie pasuje ani do trybu ASCII, ani RTU
+RS 232 jest portem przeznaczonym dla asynchronicznej transmisji znakowej, realizowanej zazwyczaj w trybie dupleksowym, czyli dwukierunkowej transmisji niejednoczenej (naprzemiennej)
+0
+Tryb dupleksowy jest równoczesny, to półdupleksowy jest niejednoczesny.
+W interfejsie RS 232 linie TxD i RxD słuza do transmisji znaków, natomiast DTR, RTS to wyjscia kontrolne, a DSR, CTS, RI i DCD to wejscia kontrolne.
+1
+Indeed
+Multipleksowanie urzadzen ze znakowym portem asynchronicznym pozwala na ich kontrole poprzez jeden port RS-232.
+1
+Zeby kontrolowac kilka urzadzen z jednego portu potrzebny jest koncentrator. Jesli ”uzywanie koncentratora” równa sie ”multipleksowanie”, to PRAWDA.
+Wezeł podrzedny w systemie MODBUS po wykryciu błedu w komunikacie wysyła potwierdzenie negatywne do wezła nadrzednego.
+1
+W odpowiedzi pole to jest wykorzystywane do pozytywnego lub negatywnego potwierdzenia wykonania polecenia.
+Czy w trybie ASCII systemu MODBUS kazdy bajt wysyłany jest jako znak z przedziału 0x00, 0xFF?
+0
+Bajt dzielimy na 2 czesci i wysyłamy jako 2 znaki z przedziału 0-9 i Ah-Fh
+Kontrola urzadzenia USB odbywa sie poprzez zapisy komunikatów do bufora o numerze 0 i odczycie informacji statusowych z bufora o numerze 0.
+1
+Zgadza się.
+W przypadku błedu transmisji kazda transakcja USB jest powtarzana, poniewaz niedopuszczalne jest przekazywanie danych przekłamanych.
+0
+Transakcje izochroniczne nie sa powtarzane w przypadku błedu transmisji.
+Hub nie dopuszcza ruchu full speed do portów, do których sa podłaczone urzadzenia low speed.
+1
+Tak, urzadzenie lowspeed blokuje mozliwosc właczenia fullspeed na swoim porcie. Urzadzenie lowspeed jest obsługiwane z predkoscia lowspeed, ale nie ma to wpływu na predkosc pozostałych urzadzen w hubie. Pakiety wysyłane do takiego urzadzenia sa po prostu poprzedzane specjalna preambuła
+Reset portu USB polega na rekonfiguracji hosta, po której host zapisuje tablice deskryptorów do urzadzenia podłaczonego do tego portu.
+0
+Reset portu USB polega na rekonfiguracji urzadzenia. W nastepujacej procedurze enumeracji miedzy innymi dochodzi do odczytu tablicy deskryptorów z urzadzenia przez host. Reset polega na przywróceniu urzadzenia do stanu domyslnego. Potem host rozpoczyna konfiguracje urzadzenia, najpierw odczytujac deskryptor urzadzenia, potem nadajac mu unikatowy adres, a nastepnie odczytujac tablice deskryptorów, dzieki którym wie, jak ma to urzadzenie skonfigurowac.
+Typowa transakcja USB składa sie z pakietów zadania i odpowiedzi, z których kazdy potwierdzany jest osobnym potwierdzeniem.
+0
+Typowa transakcja USB składa sie z pakietów token, data i handshake. Transakcje izochroniczne nie sa potwierdzane.
+W systemie USB urzadzenia zgłaszaja zadania do hosta, który je kolejkuje i nastepnie obsługuje w kolejnosci pojawiania sie zgłoszenia.
+0
+Urzadzenia nie zgłaszaja zadania, tylko sa odpytywane przez hosta. Host nie tworzy jednej kolejki, tylko w miare mozliwosci stara sie obsługiwac wszystkie urzadzenia jednoczesnie, równomiernie, zapobiegajac zawłaszczeniu.
+W USB mozna połaczyd kaskadowo do 5 hubów, korzystajacych z zasilania magistralowego
+0
+Podłaczyc je mozna tylko korzystajac z zasilania zewnetrznego lub hybrydowego. Przy zasilaniu magistralowym zabraknie zasilania juz na drugim hubie. Co wiecej, nalezy miec na uwadze maksymalne dopuszczalne opóznienie sygnału, które przy przejsciu przez 5 hubów jest osiagane - 350ns. Urzadzenia podpiete do 5’tego huba moga nie działac poprawnie.
+Mechanizm data toggle w USB słuzy do przywracania synchronizacji pomiedzy hostem i urzadzeniem, utraconej na skutek wystapienia błedów w pakietach danych.
+0
+Mechanizm data toggle przywraca synchronizacje pomiedzy hostem i urzadzeniem na skutek błedu w potwierdzeniu odsyłanym przez odbiorce. Transakcja jest powtarzana w przypadku błednego odebrania pakietu danych (odbiorca wysyła wówczas pakiet NAK handshake). Gdy wystapiło błedne odebranie potwierdzenia ACK handshake przez nadawce, dane wysyłane sa jeszcze raz (wówczas odbiorca je odrzuca i wysyła pakiet ACK handshake)
+Host kontroler USB komunikuje sie z interfejsem magistrali USB urzadzenia peryferyjnego za pomoca fizycznego kanału komunikacyjnego.
+1
+Tak, uzywamy kabelka.
+Kamera internetowa moze przesyłac obraz do komputera za pomoca transferu izochronicznego z szybkoscia LowSpeed w interfejsie USB.
+0
+Z tabelki mozna wyczytac, ze dla transferu izochronicznego nie mozna wykorzystac szybkosci LowSpeed.
+Pakiety USB przesyłane z szybkoscia LowSpeed musza byd poprzedzone pakietem preambuły.
+1
+Tak, jest on charakterystyczny dla pakietów przesyłanych z szybkoscia LowSpeed.
+Urzadzenie peryferyjne USB 2.0 moze byc podłaczone do host kontrolera za posrednictwem maksymalnie szesciu hubów.
+0
+Aby spełnic norme (ograniczenie czasowe oczekiwania na odpowiedz), mozna podłaczyd za posrednictwem maksymalnie 5 hubów.
+Pole PID w pakiecie USB zabezpieczone jest 16-bitowa suma kontrolna CRC.
+0
+Pole PID zabezpieczone jest 4-bitowym polem kontroli, bedacym prosta negacja bitów pola PID.
+Do portu dolnego huba podłaczane moga byd tylko wtyki USB typu B.
+0
+Tylko wtyki typu A.
+Transakcja dzielona w USB 1.1 składa sie z dwóch czesci: SSPLIT i CSPLIT.
+0
+Takie czary dopiero w USB 2.0
+W przypadku połaczenia USB HighSpeed wykonywane jest podparcie linii D- do Vcc za posrednictwem rezystora 1,5k.
+0
+Po podłaczeniu urzadzenia High Speed wpierw jest ono identyfikowane jako Full Speed, wiec wykonywane jest podparcie linii D+ do Vcc za posrednictwem rezystora 1,5k. Nastepnie, poprzez chirp (”cwierkanie”) host i urzadzenie ustalaja, czy mozliwa jest komunikacja w trybie High Speed. Jesli tak, usuwane jest podparcie przez rezystor, a obwód zamykany jest terminatorami.
+W kodowaniu NRZI co szesc jedynek jest wstawiany bit synchronizacji ”0”.
+0
+Pomieszane pojecia. W kodowaniu NRZI nie wystepuje dodawanie bitu synchronizacji. Proces ten nazywa sie bit stuffing. Zdanie było by poprawne, gdyby brzmiało np. W kodowaniu NRZI z bit stuffingiem co szesc.
+Transakcje kontrolna i przerwaniowa w USB 1.1 sa transakcjami aperiodycznymi z gwarantowanym pasmem w ramach jednej mikroramki.
+0
+Transakcja kontrola jest transakcja aperiodyczna. Transakcja przerwaniowa jest transakcja periodyczna.
+W kontrolerze OHC transakcje izochroniczne sa porzadkowane/kolejkowane w drzewo/strukture drzewiasta.
+1
+Tak, OHC wykorzystuje strukture drzewa, a UHC tablice wskazników (liste podwieszana).
+Standard USB 2.0 wymaga skreconych, ekranowanych kabli.
+1
+Well, High speed all the way, wiec wymaga
+Transfer kontrolny i przerwaniowy sa transferami aperiodycznymi.
+0
+Było podobne pytanie. Transfer kontrolny jest aperiodyczny, transfer przerwaniowy jest periodyczny.
+Wielowarstwowa architektura USB 2.0 składa sie z 3 warstw.
+1
+Tak - warstwa interfejsu magistrali USB, warstwa urzadzenia USB, warstwa funkcji urzadzenia.
+W porcie USB dane sa dzielone na transakcje.
+1
+Dane w ramce sa dzielone na transakcje, wiec tak.
+Hub podłaczony do portu USB ma obciazalnosc 100uA.
+0
+Hub podłaczony do portu USB bez własnego zasilania (zasilanie magistralowe) ma obciazalnosd dla portów dolnych do 100mA na port (maksymalna 400mA na cały hub). Hub z zasilaniem zewnetrznym lub hybrydowym ma obciazalnosd do 500mA na port.
+W systemie USB do mechanizmów kontroli danych nalezy przełaczanie pakietów danych
+1
+Tzw. Data Toggle
+W systemie USB do mechanizmów kontroli danych nalezy wykrywanie braku aktywnosci na linii danych
+1
+Tak, po 3 ms braku aktywnosci USB przechodzi w tryb zmniejszonego poboru pradu.
+W systemie USB do mechanizmów kontroli danych nalezy zabezpieczenie znacznika SOF lub EOF
+0
+Reakcja jest natomiast objete wystapienie fałszywego znacznika kon ca pakietu (false EOP)
+W systemie USB do mechanizmów kontroli danych nalezy kodowanie LRC
+0
+Pakiety zabezpieczone sa kodowaniem CRC.
+Wydajnosc dolnego portu (USB 2.0) wynosi 500mA.
+0
+Nie wiadomo. Zasilany Hub moze wystawic te 500mA, ale niezasilany juz tylko 100mA
+USB 2.0 ma pare przewodów ekranowanych.
+1
+Taki upgrade.
+W kodowaniu NZR wstawia sie dodatkowe bity synchroniczne.
+0
+W USB dodatkowe bity synchroniczne wstawia sie przy kodowaniu NRZI
+Urzadzenie USB 2.0 moze zasygnalizowac swoja niegotowosc do zapisu danych z szybkoscia High- Speed wysyłajac pakiet PING-NYET.
+0
+Wychodzi na to, ze niegotowosc zgłasza samym NYET? Pyta – PING, odpowiada (niegotowosc) NYET. I tak cały czas, chyba ze dostanie ACK. ACK – wykonanie transakcji OUT. NYET – host kontynuuje wysyłanie zapytan PING
+W systemie deskryptorów urzadzenia USB moze wystapic kilka deskryptorów urzadzenia, konfiguracji, interfejsów I punktów koncowych.
+0
+Deskryptor urzadzenia moze byc jeden. Innych – konfiguracji, interfejsu, koncowych moze byc wiecej.
+Hub USB ma przerwaniowy punkt koncowy, który wykorzystuje do powiadamiania hosta o podłaczeniu urzadzenia USB do któregos z jego portów dolnych.
+1
+Tak, jest to tzw. Hub change endpoint (punkt koncowy ”zmiany w hubie”)
+Na wierzchołku wielopoziomowego, hierarchicznego układu deskryptorów USB znajduje sie deskryptor konfiguracji.
+0
+Na szczycie znajduje sie pojedynczy deskryptor urzadzenia.
+Transfer masowy I izochroniczny USB 1.1 sa przykładami transferów aperiodycznych z zagwarantowanym pasmem w ramach jednej mikroramki.
+0
+Izochroniczny jest periodyczny, masowy nie ma zagwarantowanego pasma (wg tabelki z predkosciami)
+W deskryptorze konfiguracji USB jest jakis pole statusowe, które mówi o maksymalnym poborze pradu. Dla wartosci 50 urzadzenie pobiera 50mA.
+0
+Pole to jest tak skonstruowane, zeby wartosc zmiesciła sie w jednym bajcie, ze skokiem co 2mA. Dlatego urzadzenie, które zgłasza, ze 50 moze zasysac maksymalnie 100mA.
+Uszeregowanie transakcji w USB nie zalezy od implementacji kontrolera.
+0
+W OHC przerwaniowe sa w strukturze drzewa, a w UCH listy podwieszanej, co ma wpływ na uszeregowanie (do sprawdzenia).
+Host moze zasygnalizowac chec zapisu danych do urzadzenia wysyłajac pakiet NYET do urzadzenia USB 2.0, które z kolei odpowiada pakietem PING jesli jest gotowe do zapisu.
+0
+To host posyła PING - zapytanie, czy urzadzenie jest gotowe do zapisu. Te odsyła ACK - gotowe, lub NYET - jeszcze nie.
+Czy w USB 2.0 liczba poziomów moze byc nieograniczona?
+0
+Nie poniewaz istnieja 2 typu złacz (typu A i typu B). Jeden z nich słuzy do wpinania do dolnych portów huba, drugi do górnego portu.
+Po resecie w systemie FireWire (IEEE1394) wykonywane sa procedury TREEID i SELFID .
+1
+Po resecie nastepuje „TREEID” odpowiedzialne za ustalenie wezła głównego a pózniej „SELFID” odpowiedzialne za rozesłanie adresów do poszczególnych portów.
+Transakcja dzielona IEEE1394 umozliwia wykorzystanie magistrali przez inne wezły po zakonczeniu subakcji zadania (request), a przed wysłaniem odpowiedzi (response).
+1
+Tak, pomiedzy zadaniem a odpowiedza magistrala jest wolna i mozna ja wykorzystac
+Transakcje asynchroniczne IEEE1394 sa uprzywilejowane w stosunku do transakcji izochronicznych i w zwiazku z tym zawsze wykonywane sa na poczatku cyklu.
+0
+Jest odwrotnie. To izochroniczne sa uprzywilejowane nad asynchronicznymi.
+Urzadzenie IEEE 1394 bedace konsumentem zasilania moze posiadad co najwyzej jedno 6-kontaktowe gniazdo IEEE 1394.
+1
+Tak po prostu jest.
+Numery wezłów IEEE 1394 nadawane sa podczas procedury samoidentyfikacji na podstawie wartosci wewnetrznych liczników odebranych pakietów SelfID.
+1
+Tak, SELFID przypisuje kazdemu wezłowi unikatowy identyfikator pełniacy role adresu, a nastepnie rozsyła je w formie pakietów selfid z kazdego portu do wszystkich pozostałych wezłów.
+Pakiet potwierdzenia odbioru asynchronicznego pakietu zadania zapisu bloku danych w pierwszej fazie transakcji asynchronicznej IEEE 1394 zawiera sume kontrolna w formie parzystosci.
+1
+Tak, zawiera kod potwierdzenia i parzystosc - patrz budowa pakietów.
+W IEEE 1394 pakiet nowego cyklu (SCP) jest wysyłany ZAWSZE co 125us.
+0
+Izochroniczne owszem, ale asynchroniczne w ramach interwału równych szans, którego długosc zalezy od liczby wezłów asynchronicznych jednoczesnie zadajacych dostepu do łacza. Oprócz tego, jezeli jakas transakcja asynchroniczna zacznie sie tuz przed koncem rozesłania pakietu nowego cyklu SCP i bedzie ona trwała dostatecznie długo, wtedy cykl ten zostanie wydłuzony do skonczenia tej transakcji. Nastepny cykl bedzie wtedy krótszy, aby ”wyrównac” przecietny czas cyklu.
+IEEE 1394 posiada osobne pary ekranowanych przewodów (dla) TPA i TPB.
+1
+Tak wynika z przekroju budowy
+Pole adresowe w IEEE1394 składa sie z numeru magistrali (10b), numeru wezła (6b) i adresu w wezle (48b).
+1
+Wszystko sie zgadza.
+W systemie IEEE1394 wezeł A o szybkosci S100 połaczono z wezłem B o szybkosci S200 za posrednictwem wezła C o szybkosci S400, co zwiekszyło szybkosc transmisji pomiedzy wezłami A i B w stosunku do ich połaczenia bezposredniego.
+0
+Nie, wezeł A wciaz nadaje z szybkoscia S100, a teraz dodatkowo musi przejsc przez wezeł C
+W interfejsie IEEE1394 przerwa pomiedzy subakcjami transakcji asynchronicznych jest mniejsza od przerwy pomiedzy transakcjami izochronicznymi, co powoduje ich uprzywilejowanie podczas arbitrazu.
+0
+Izochroniczne maja pierwszenstwo, to raz. Dodatkowo przerwa pomiedzy izochronicznymi zazwyczaj jest krótsza od tej pomiedzy asynchronicznymi.
+Bioracy udział w arbitrazu asynchronicznym wezeł A (dotyczy interfejsu IEEE 1394) nie moze uzyskac dostepu do łacza, bo zdominował je asynchroniczny wezeł B, który ciagle wygrywa arbitraz.
+0
+Kolejnosc przydziału zalezy od połozenia wezła w drzewie systemu. Wezły połozone blizej korzenia uzyskaja dostep przed wezłami bardziej oddalonymi. Łaczny czas wykonania subakcji przez wszystkie wezły nazywa sie fairness interval. W tym czasie kazdy wezeł uzyska dostep do magistrali, aby wykonac subakcje. Dostep do magistrali wezeł zarzadzajacy przekazuje “rotacyjnie”. Nastepna subakcja bedzie mogła byc wykonana w kolejnym interwale równych szans.
+Odbiorca transakcji asynchronicznej wygrał arbitraz I odesłał pakiet odpowiedzi. Inicjator transakcji odebrał odpowiedz I oczekuje na wygranie arbitrazu w celu odesłania pakietu potwierdzenia.
+0
+Nie, istnieje cos takiego jak dostep natychmiastowy - potwierdzenie wysyła sie za posrednictwem warstwy PHY, która nie rywalizuje o dostep do magistrali.
+W przypadku transakcji dołaczanych (interfejs IEEE 1394) nie trzeba rywalizowac o dostep do magistrali w celu odesłania odpowiedzi.
+1
+Transakcja dołaczana dostarcza dane przy potwierdzeniu, a ono nie wymaga arbitrazu.
+W interfejsie IEEE 1394 szansa wygrania arbitrazu wzrasta wraz ze wzrostem odległosci (mierzone liczba wezłów posredniczacych) wezła ubiegajacego sie o dostep do magistrali od korzenia.
+0
+Jest na odwrót – blizej korzenia, wieksze szanse.
+Wartosc przerw i ograniczen czasowych w interfejsie IEE 1394 sa “na sztywno” okreslone przez standard i nie moga byc korygowane.
+0
+Przerwa pomiedzy subakcjami transakcji asynchronicznej moze byc regulowana.
+W przykładowym interfejsie IEEE 1394 wystepuja tylko transakcje asynchroniczne. Jezeli uczestnikiem (inicjatorem lub odbiorca) transakcji asynchronicznej jest korzen, to zawsze wygra on arbitraz jako pierwszy.
+0
+Zgodnie z zasada ”Blizej korzenia, wieksze szanse” korzen wygrywa wszystko. Jednak jezeli jest on odbiorca, to wezeł bedacy jego nadawca niekoniecznie musi wygrywac kazdy arbitraz. Oprócz tego, wystepuja transakcje izochroniczne i asynchroniczne.
+Kontroler cyklu musi byc korzeniem w topologii IEE1394, bo musi wysyłac sygnał CSP.
+1
+Chyba.
+Wezeł w IEE1394, który zainicjalizował transakcje asynchroniczna moze byc odbiorca transakcji zainicjalizowanej przez inny wezeł w tym samym Interwale Równych Szans.
+1
+Raczej tak, wezły asynchroniczne do wykonania transakcji nie wymagaja alokacji pasma (subakcja). Also - zarzadzanie magistrala stara sie umozliwic jednoczesne jej wykorzystanie przez rózne transfery.
+W systemie Firewire urzadzenie, które jest najblizej korzenia cały czas wygrywa arbitraz, blokujac tym samym dostep do magistrali innym urzadzeniom na czas wykonania całego transefru, tzn. wszystkich transakcji w ramach transferu.
+0
+Nie, poniewaz po wykonaniu pierwszej transakcji wezeł cały czas wygrywajacy arbitraz bedzie musiał czekac na nowy Interwał Równych Szans. Do tego czasu inne wezły realizuja swoje transakcje.
+GPIB (IEEE-488) jest interfejsem równoległym, opartym na 8-bitowej, 2 kierunkowej magistrali danych i 8 sygnałach sterujacych: REN, IFC, ATN, SRQ, EOI, NRFD, NDAC, DAV
+1
+Tak, bity wysyła sie ósemkami, stad m. in. podaje sie predkosc w bajtach na sekunde
+SCPI to jezyk programowania na bazie jezyka C wyposazony w biblioteki funkcji sterujacych urzadzeniami pomiarowo-kontrolnymi.
+0
+SCPI jest jezykiem kontroli urzadzeo (i nie bazuje na C).
+Znak ’:’ w rozkazach SCPI reprezentuje przejscie pomiedzy poziomami w rozgałezionej strukturze subsystemu, natomiast prefiks ’*’ oznacza rozkaz wspólny.
+1
+Tak, dwukropek słuzy do precyzowania zapytania, gwiazdka jako nagłówek komunikatu wspólnego.
+System statusowy urzadzenia SCPI składa sie tylko z jednego, 8-bitowego rejestru, w którym bit B6 jest zgłoszeniem zadania obsługi.
+0
+Składa sie z minimum dwóch rejestrów, których układ jest wielopoziomowy (hierarchiczny).
+Kontrola szeregowa I kontrola równoległa to mechanizmy automatycznego wykrywania urzadzen podłaczonych do systemu IEEE 488.
+0
+Kontrola szeregowa I równoległa słuza do identyfikacji urzadzen zgłaszajacych zadanie obsługi.
+Maska zwiazana z bajtem statusowym SCPI słuzy do blokowania ustawiania wybranych bitów bajtu statusowego.
+0
+Maska zwiazana z bitem statusowym jest rejestr maski zadania obsługi, który odpowiada za selekcje bitów powodujacych zgłoszenie zadania, ale nie ma on wpływu na stan samych bitów w bajcie statusowym. Bajt statusowy jest rejestrem zbiorczym swoich rejestrów nadrzednych, wiec jego wartosc zalezy do wartosci tamtych rejestrów i ich masek.
+Tryby HOLD, SNIFF oraz tryb PARK słuza do usypiania Mastera.
+0
+To nieprawda. Tryby HOLD oraz SNIFF słuza do usypiania Slave’a (HOLD musi cały czas podtrzymywac usypianie, SNIFF robi to jednorazowo. Tryby PARK słuzy do zmiany stanu Slave’a z aktywnego w zaparkowany.
+Interfejsy USB, IEEE1394 oraz RS-232 udostepniaja zasilanie systemowe i maja mechanizmy zarzadzania zasilaniem.
+0
+USB i IEEE-1394 owszem, ale nie RS-232.
+Aby dołaczyc do siecie pikonet w trakcie konfiguracji nalezy wykonac procedury TREEID oraz SELFID.
+0
+Pikonet jest zwiazany z Bluetooth - aby dołaczyc do sieci pikonet, nalezy wykonac procedury inquiring oraz paging. Procedury TREEID oraz SELFID sa wykorzystywane podczas konfiguracji sieci IEEE 1394 Firewire.
+System statusowy urządzenia SCPI ma płaską, jednopoziomowa strukturę i nie podlega konfiguracji
+0
+Ma wielopoziomowa strukturę hierarchiczna i można go konfigurować
+Przesyłanie danych na magistrali IEEE 1394 możliwe jest natychmiast po resecie systemu 
+0
+Najpierw trzeba wykonać TREEID i SELFID
+Kontrola urządzenia USB odbywa się przez 2 wirtualne kanały kontrolne: jeden do przekazywania rozkazów do bufora o numerze 0 i drugi do odczytu informacji z bufora i numerze 1
+0
+Przekazywanie rozkazów do bufora 0, odczyt statusu z bufora 0
+W przypadku jednoczesnego żądania dostępu do magistrali FireWire dwóch lub więcej węzłów asynchronicznych, arbitraż wygrywa węzeł znajdujący się bliżej korzenia i uzyskuje dostęp do łącza na czas pozostały do końca cyklu
+0
+Węzeł bliżej korzenia wygra arbitraż, ale w ramach interwału równych szans każdy węzeł uzyska dostęp do łącza na czas jednej subakcji
+W przykładowym systemie USB 2.0 wszystkie urządzenia podłączone do hosta sa High Speed i charakteryzują się takimi samymi czasami odpowiedzi. Zastosowanie transakcji dzielonych w takim systemie istotnie zwiększy…
+1
+tak
+Wykonanie transakcji w systemie USB 1.x nie jest ograniczone czasowo i dlatego liczba hubów oraz segmentów toru transmisyjnego pomiędzy urządzeniem i hostem moze być dowolna
+0
+Jest ograniczone czasowo, dlatego limit hubów między hostem a urządzeniem to 5
+W USB można podłączyć kaskadowo do 5 hubów 4 portowych korzystających z zasilania magistralowego
+0
+Można podłączyć kaskadowo do 5 hubów 4 portowych, ale będą wymagać zasilania zewnętrznego/hybrydowego
+Mechanizm data toggle w USB służy do przywracania synchronizacji pomiędzy hostem i urządzeniem utraconej na skutek uszkodzenia pakietu danych w transakcji
+0
+Zabezpiecza przed utratą synchronizacji. Synchronizacja nie jest tracona gdy wystąpi nadesłanie błędnego pakietu
+W teorii obwodów sprzężenie pojemnościowe reprezentuje oddziaływanie na obwody elektryczne zmiennego pola magnetycznego, a sprzężenie indukcyjne oddziaływanie zmiennego pola elektrycznego
+0
+Sprzężenie indukcyjne od zmiennego pola magnetycznego, sprzężenie pojemnościowe od zmiennego pola elektrycznego
+Ochrona przed zakłóceniami obwodów transmisyjnych w interfejsach przewodowych polega na ich ekranowaniu połączonym z uziemianiem ekranu (zabezpieczenie przed sprzężeniem indukcyjnym) i zmniejszaniu powierzchni obwodów (zabezpieczenie przed sprzężeniem pojemnościowym)
+1
+tak
+Standardowe interfejsy komputerowe takie jak RS-232, USB 2.0, FireWire 400 zapewniają dwukierunkową komunikację komputera z urządzeniem peryferyjnym realizowana w trybie półdupleksowym
+0
+Tylko RS-232 umożliwia komunikację w trybie dupleksowym, pozostałe w trybie półdupleksowym.
+Typowe formaty znaków RS-232 i odpowiadające im długości (w bitach) są następujące: 7E1 (9), 8N..., 8E1 (11), 7O2 (11), 8O1 (11), 8N1 (10)\
+0
+Są to poprawne formaty znaków, ale długość się wylicza: (pierwsza cyfra)(+1 jeśli O lub E)(+druga cyfra)(+1 na znacznik początku ramki)
+Transmisja znakow w porcie RS-232 jest synchronizowana sygnalem zegarowym, a transmisja bitow nie.
+0
+Znaki transmitowane asynchronicznie, bity synchronicznie
+Działanie systemu USB polega na rozgłaszaniu na magistrali komunikatu żądania dostępu do łącza przez urządzenie peryferyjne (podrzędne) za każdym razem gdy chce ono zapisać/odczytać dane do/z innego urządzenia w systemie. Rolę arbitra dostępu do magistrali pełni host USB
+0
+Host USB rozsyła zapytania do urządzeń o to, czy potrzebują dostępu
+Na dwukierunkowym łączu znakowym w standardzie RS-232 ograniczonym tylko do linii transmisji danych nie ma możliwości sterowania przepływem danych (data flow control) przez urządzenie odbierające
+0
+Jest to możliwe np. przez sygnały XON, XOFF, umożliwia trasmisje tylko za pomocą dwóch linii danych za sterowaniem przepływem danych 
+W interfejsie USB wszystkie transakcje wymagają interakcji nadawcy danych z odbiorca danych co oznacza konieczność potwierdzenia odbioru każdego pakietu danych
+0
+Transakcji izochronicznych się nie potwierdza
+Przy tej samej szybkości transmisji i założeniu zerowego odstępu pomiędzy znakami w ramce, transmisja "n" bajtów w systemie MODBUS pracującym w trybie ASCII będzie trwała znacząco krócej niż transmisja tej samej liczby bajtów w systemie MODBUS pracującym w trybie RTU
+0
+W ASCII każdy bajt informacji wymaga przesłania dwóch znaków, co daje narzut, który przekroczy czas zaoszczędzony na przerwie między ramkami w RTU
+GPIB (IEEE- 488) jest interfejsem szeregowym opartym na 8-bitowej, 2 kierunkowej magistrali danych i 8 sygnałach sterujących: REN, IFC, ATN, SRQ, EOI, NRFD, NDAC, DAV
+0
+Jest interfejsem równoległym
+W otwartym host kontrolerze (OHC) interfejsu USB tak samo jak w kontrolerze uniwersalnym (UHC), można zarezerwować pasmo w ramce przeznaczone dla transakcji masowych.
+0
+W uniwersalnym kontrolerze nie ma takiej możliwości
+Znak ":" w rozkazach SCPI reprezentuje przejscie pomiedzy poziomami w rozgałęzionej strukturze grupy rozkazowej (subsystemu), prefiks "*" oznacza rozkaz wspólny, natomiast <LF> jest terminatorem komunikatu programującego i odpowiedzi
+1
+tak
+Do jednego portu RS-232 można podłączyć do 5 urządzeń, podczas gdy do jednego portu RS-485 tylko jedno
+0
+Do RS-232: jedno urządzenie, do RS-485: 32 urządzenia
+Liczba znaków w ramce protokołu Modbus w trybie ASCII, która transmituje 10 bajtów danych jest równa 30.
+0
+Jest równa 29: SOF - 1 znak, adres - 2, rozkaz - 2, dane - 20, LRC - 2, CR - 1,LF - 1. Dane 20, ponieważ każdy bajt jest zapisywany na 2 znakach
+W interfejsie USB transakcje kontrolne nie mają zagwarantowanego pasma i dlatego są wykonywane tylko w przypadku wolnego pasma na końcu ramki
+0
+Mają zarezerwowane 10% pasma dla low i full speed, a 20% dla high speed. Transakcje masowe nie mają.
+Przy tej samej szybkości transmisji i założeniu zerowego odstępu pomiędzy znakami w ramce, transmisja “n” bajtów w systemie MODBUS pracującym w trybie ASCII będzie trwała znacząco krócej niż transmisja tej samej liczby bajtów w systemie MODBUS pracującym w trybie RTU
+0
+Transmisja w RTU będzie trwała krócej, ponieważ w ASCII każdy bajt jest przesyłany w postaci dwóch znaków ASCII, a w RTU w postaci jednego
+Tzw. “kontrola szeregowa” jest standardowym mechanizmem stosowanym w interfejsie GPIB (IEEE-488) w celu konfiguracji urządzeń do komunikacji
+0
+Kontrola szeregowa i równoległa służą do identyfikacji urządzeń zgłaszających żądanie obsługi
+W kontrolerze uniwersalnym (UHC) interfejsu USB, 50% pasma zarezerwowane jest dla transakcji cyklicznych, 20% dla kontrolnych a reszta dla masowych.
+0
+Transfery izochroniczne i przerwaniowe 90%, kontrolne 10%, a transfer masowy nie jest gwarantowany, jeżeli pozostałe 3 zajmą maksymalny możliwy czas, to transfer masowy się nie odbędzie
+Znak ‘:’ w rozkazach SCPI reprezentuje przejście pomiędzy poziomami w rozgałęzionej strukturze grupy rozkazowej (sybsystemu), prefiks ‘*’ oznacza rozkaz wspólny, natomiast <CR> jest terminatorem komunikatu programującego i odpowiedzi
+0
+Terminatorem komunikatu jest <LF>
+Konfiguracja systemu statusowego urządzenia SCPI polega na selekcji rejestrów, które mają zostać włączone do systemu statusowego
+1
+prawda to
+W systemie USB wyróżniono następujące rodzaje transferów danych: prosty, złożony i mieszany
+0
+Przerwaniowy, izochroniczny, kontrolny, masowy
+W przypadku jednoczesnego żądania dostępu do magistrali FireWire dwóch lub więcej węzłów asynchronicznych, arbitraż zawsze wygrywa węzeł znajdujący się bliżej korzenia
+1
+jeszce jak 
+W systemie USB 2.0 transakcje asynchroniczne (przerwaniowa i izochroniczna) mają niższy priorytet od transakcji synchronicznych (kontrolnych i masowych)
+0
+Przerwaniowe i izochroniczne są synchroniczne i mają wyższy priorytet od asynchronicznych - kontrolnej i masowej.
+Wszystkie pakiety asynchronicznej transakcji danych w systemie USB wysyłane są przez hosta, natomiast transakcji cyklicznej przez urządzenie.
+0
+Transfery izochroniczne i kontrolne przez hosta, masowe i przerwaniowe przez urządzenie
+W teorii obwodów, sprzężenie pojemnościowe reprezentuje oddziaływanie na obwody elektryczne zmiennego pola elektrycznego, a sprzężenie indukcyjne oddziaływanie zmiennego pola magnetycznego.
+1
+jak najbardziej tak 
+Źródłem zasilania na magistrali USB jest tylko host
+0
+Można dodać zasilanie zewnętrzne
