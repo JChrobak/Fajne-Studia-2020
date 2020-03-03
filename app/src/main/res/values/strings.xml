@@ -10,10 +10,12 @@
     <string name="text_save_data_title">Tytuł danych</string>
     <string name="text_save_data">Dane</string>
     <string name="text_load_title">Wybierz Dane</string>
-    <string name="text_learn_title" >Pytanie %s/%s</string>
+    <string name="text_learn_title">Pytanie %s/%s</string>
     <string name="text_generated">%s</string>
     <string name="text_learn_score">Aktualny wynik %s/%s</string>
     <string name="text_true">PRAWDA</string>
     <string name="text_false">FAŁSZ</string>
     <string name="text_empty" />
+    <string name="button_save_ext">Utwórz  dane na podstawie pliku</string>
+    <string name="text_save_external_title">Wybierz plik który chcesz zapisać</string>
 </resources>

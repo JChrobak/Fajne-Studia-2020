@@ -11,7 +11,7 @@ import java.io.BufferedReader
 import java.io.FileInputStream
 import java.io.InputStreamReader
 
-//Learn activity - activity responsible for parsing data in saved data set and displaying questions and checking user answers
+//LearnActivity - activity responsible for parsing data in saved data set and displaying questions and checking user answers
 class LearnActivity : AppCompatActivity() {
     //Layout component that are changed or require additional setup
     //Only two buttons from layout are programmed because the app supports only true or false questions however i plan to expand it to single choice questions
@@ -48,7 +48,10 @@ class LearnActivity : AppCompatActivity() {
             selectedDataSet=intent.getStringExtra("selectedDataSet")
 
             //Parse the data from data set to the list
-            parseData(selectedDataSet)
+            if(!selectedDataSet.isNullOrEmpty())
+                parseData()
+            else
+                Toast.makeText(this,"Błąd przy pobieraniu wybranego zbioru danych",Toast.LENGTH_SHORT).show()
             //Set number of all questions
             numQuestion=dataSet.size
             //Update all text components
@@ -115,23 +118,26 @@ class LearnActivity : AppCompatActivity() {
     }
 
     //Function that parses data from selected data set to array of questions
-    private fun parseData(data: String) {
+    private fun parseData() {
         //Open and read selected file
-        var fileInputStream: FileInputStream? = null
-        fileInputStream = openFileInput(selectedDataSet)
-        var inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
-        val bufferedReader: BufferedReader = BufferedReader(inputStreamReader)
+        val fileInputStream = openFileInput(selectedDataSet)
+        val inputStreamReader = InputStreamReader(fileInputStream)
+        val bufferedReader= BufferedReader(inputStreamReader)
         val splitData: ArrayList<String> = ArrayList()
         var text: String? = null
         //Add every line of text to the list
         while ({ text = bufferedReader.readLine(); text }() != null) {
-                splitData.add(text?:"")
+            //Add only non blank lines
+            val temp: String=text?:""
+            if(!temp.isNullOrBlank())
+                splitData.add(temp)
         }
         dataSet= ArrayList()
         //Move the data from the list to corresponding fields in question data array
         for(i in 0 until splitData.size step 3)
         {
-            val temp= QuestionData(i/3, splitData[i],splitData[i+1].toInt(),splitData[i+2])
+            //Replace all spaces in the number to avoid exceptions
+            val temp= QuestionData(i/3, splitData[i],splitData[i+1].replace("\\s".toRegex(),"").toInt(),splitData[i+2])
             dataSet.add(temp)
         }
         //Shuffle all the questions

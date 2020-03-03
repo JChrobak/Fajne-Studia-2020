@@ -20,7 +20,7 @@ class LoadData : AppCompatActivity() {
         setContentView(R.layout.activity_load_data)
         listViewData=findViewById(R.id.listViewData)
         //Update list view
-        updateListView(listViewData)
+        updateListView()
         //On normal click select data set
         listViewData.onItemClickListener =
             OnItemClickListener { _, _, position, _ ->
@@ -34,15 +34,15 @@ class LoadData : AppCompatActivity() {
 
     }
     //Function that updates list view with a list of all found files in internal storage
-    private fun updateListView(listView: ListView){
+    private fun updateListView(){
         //Check if any files are saved and if there are any create an adapter for the list view
         if(this.fileList().isNotEmpty())
-            listView.adapter=ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,this.fileList())
+            listViewData.adapter=ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,this.fileList())
         else
         {
             //If there are none return to main menu
             Toast.makeText(this,"Nie znaleziono żadnych zapisanych danych na urządzeniu, dodaj jakieś dane",Toast.LENGTH_SHORT).show()
-            val intent: Intent= Intent(this,MainActivity::class.java)
+            val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -63,7 +63,7 @@ class LoadData : AppCompatActivity() {
                 Toast.makeText(this,"Z powodu błedu plik nie został poprawnie usunięty!",Toast.LENGTH_SHORT).show()
             //Remove outdated adapter and update list view
             listViewData.adapter=null
-            updateListView(listViewData)
+            updateListView()
         }
         builder.setNegativeButton("Nie",null)
         builder.show()
@@ -75,7 +75,7 @@ class LoadData : AppCompatActivity() {
     {
         selectedDataSet = listViewData.getItemAtPosition(position) as String
         Toast.makeText(applicationContext,"Wybrano zestaw: $selectedDataSet",Toast.LENGTH_SHORT).show()
-        val intent: Intent= Intent(this,MainActivity::class.java)
+        val intent = Intent(this,MainActivity::class.java)
         //Add name of selected data set to intent extra field and return to the menu
         intent.putExtra("selectedDataSet",selectedDataSet)
         startActivity(intent)
