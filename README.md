@@ -21,7 +21,7 @@ Sum of two numbers that are bigger than 0 is always bigger than 0.
 ```
 Data validator was updated to be more forgiving. If you separate parts of question with multiple new line characters or add some white spaces before or after the number that corresponds to the question answer, data will still be accepted.
 
-Example of new data that is correct now but was incorrect in later versions:
+Example of new data that is correct now but was incorrect in previous versions:
 ```
 
 Does 2+2=4?
